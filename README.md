@@ -32,3 +32,8 @@ To run the script use following commands
     ```python
     python ./main.py
     ```
+
+***Note:** This script listents to all nested files, ignoring directories like `.git` , `node_modules`. If you want to add custom folders that you want the script to ignore add them in filechange.py like this:*
+```python
+10:> ignoredirs = ['.git' , '.idea' , '__pycache__' , 'node_modules' , 'custom_folder']
+```

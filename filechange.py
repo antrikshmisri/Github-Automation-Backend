@@ -6,7 +6,9 @@ import time
 import diffcalc
 mypath = os.getcwd()
 nestfiles = []
+# add folders that you don't want to listen to
 ignoredirs = ['.git' , '.idea' , '__pycache__' , 'node_modules']
+# gets the list of all nested files
 def getNestedFiles(rootDir):
     for path , subdirs , files in os.walk(rootDir):
         if(all(ele not in path for ele in ignoredirs)):
@@ -16,6 +18,7 @@ def getNestedFiles(rootDir):
         
 onlyfiles = getNestedFiles(mypath)
 
+# Reads and appends the contents of each file
 def read_file():
     filecontent = []
     for file in onlyfiles:
