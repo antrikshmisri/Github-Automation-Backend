@@ -50,6 +50,3 @@ def ischanged(url , branch):
                 git.push(url , branch)
             initial = current
 
-
-
-
