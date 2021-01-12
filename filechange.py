@@ -5,7 +5,17 @@ import gitcommands as git
 import time
 import diffcalc
 mypath = os.getcwd()
-onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
+nestfiles = []
+ignoredirs = ['.git' , '.idea' , '__pycache__' , 'node_modules']
+def getNestedFiles(rootDir):
+    for path , subdirs , files in os.walk(rootDir):
+        if(all(ele not in path for ele in ignoredirs)):
+            for name in files:
+                nestfiles.append(join(path , name))
+    return nestfiles
+        
+onlyfiles = getNestedFiles(mypath)
+
 def read_file():
     filecontent = []
     for file in onlyfiles:
