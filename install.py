@@ -1,6 +1,5 @@
 from shutil import copy , copyfile
 import os
-from subprocess import call
 dir = os.getcwd()
 files = []
 # files = ['diffcalc.py' , 'main.py' , 'filechange.py' , 'gitcommands.py' , 'repoInfo.py']
