@@ -25,10 +25,10 @@ To run the script use following commands
     ```
 3. goto your project directory
     ```bash
-    cd project_dir
+    cd project_dir/auto-scripts
     ```
 
 4. Run the python script to listen for changes
     ```python
-    python main.py
+    python ./main.py
     ```
