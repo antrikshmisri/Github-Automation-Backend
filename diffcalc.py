@@ -16,6 +16,6 @@ def calcDiff(firstFile , secondFile):
     maxspacesinit = getMaxSpaces(deltainit)
     print('CHANGED LINES ARE:-\n' , '-' * maxspacesinit)
     for ele in deltainit:
-        print(str(ele.strip()) , ' ' * (maxspacesinit - len(ele.strip())), '+|')
+        print(str(ele.strip()) , ' ' * (maxspacesinit - len(ele.strip())), '+')
     print('' , '-' * maxspacesinit)
     
