@@ -1,8 +1,6 @@
 import repoInfo,filechange
 import gitcommands as git
 import pyfiglet
-f = pyfiglet.figlet_format('G - AUTO' , font = '5lineoblique')
-print(f)
 def init():
     info = repoInfo.checkinfoInDir()
     if('n' in info):
@@ -21,4 +19,6 @@ def init():
         filechange.ischanged(info[0] , info[1])
 
 if __name__ == '__main__':
+    f = pyfiglet.figlet_format('G - AUTO' , font = '5lineoblique')
+    print(f)
     init()
