@@ -1,2 +1,3 @@
 To test the script's functionality make changes to these files.
 added a test line
+added a newline
