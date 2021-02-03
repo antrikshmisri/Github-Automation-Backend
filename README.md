@@ -14,21 +14,24 @@ This script allows user to completely automate github workflow. This script keep
 
 To run the script use following commands
 
-
-1. Run the installation script
+1. Get all the requirements
+    ```bash
+    pip install -r ./requirements.txt
+    ```
+2. Run the installation script
     ```bash
     python install.py
     ```
-2. Enter the project directory where changes are to be listened
+3. Enter the project directory where changes are to be listened
     ```bash
     Enter installation directory: project_dir
     ```
-3. goto your project directory
+4. goto your project directory
     ```bash
     cd project_dir
     ```
 
-4. Run the python script to listen for changes
+5. Run the python script to listen for changes
     ```python
     python ./auto-scripts/main.py
     ```
