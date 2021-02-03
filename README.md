@@ -36,7 +36,5 @@ To run the script use following commands
     python ./auto-scripts/main.py
     ```
 
-***Note:** This script listens to all nested files, ignoring directories like `.git` , `node_modules`. If you want to add custom folders that you want the script to ignore add them in filechange.py like this:*
-```python
-10 ignoredirs = ['.git' , '.idea' , '__pycache__' , 'node_modules' , 'custom_folder']
-```
+***Note:** This script listens to all nested files, ignoring all the directories and files present in .gitignore. If you want to add custom folders that you want the script to ignore add them in .gitignore*
+

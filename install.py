@@ -13,12 +13,12 @@ def checkForIgnore(dst):
 
 def addToIgnore(dst):
     with open(os.path.join(dst , '.gitignore') , "a") as f:
-            f.write('\n/auto-scripts')
+            f.write('auto-scripts\n.idea\n__pycache__\n.git')
             f.close()
 
 def makeIgnore(dst):
     f = open(os.path.join(dst , '.gitignore') , "x")
-    f.write('/auto-scripts')
+    f.write('auto-scripts\n.idea\n__pycache__\n.git')
     f.close()
 
 def copyfiles(file:str , dst:str):
@@ -33,7 +33,6 @@ def installfiles():
     else:
         print('.gitignore not found, creating one')
         makeIgnore(location)
-        addToIgnore(location)
     os.makedirs(os.path.join(location , 'auto-scripts'))
     location = os.path.join(location , 'auto-scripts')
     print('Installing Files')

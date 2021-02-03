@@ -4,16 +4,19 @@ from os.path import isfile, join
 import gitcommands as git
 import time
 import diffcalc
+import ignore
 mypath = os.getcwd()
 nestfiles = []
-# add folders that you don't want to listen to
-ignoredirs = ['.git' , '.idea' , '__pycache__' , 'node_modules']
+
+ignoredirs = ignore.getIgnoreFiles()
+print(ignoredirs)
 # gets the list of all nested files
 def getNestedFiles(rootDir):
     for path , subdirs , files in os.walk(rootDir):
         if(all(ele not in path for ele in ignoredirs)):
             for name in files:
                 nestfiles.append(join(path , name))
+    print(nestfiles)
     return nestfiles
         
 onlyfiles = getNestedFiles(mypath)
