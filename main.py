@@ -1,5 +1,8 @@
 import repoInfo,filechange
 import gitcommands as git
+import pyfiglet
+f = pyfiglet.figlet_format('Github-Automation' , font = 'alligator')
+print(f)
 def init():
     info = repoInfo.checkinfoInDir()
     if('n' in info):
