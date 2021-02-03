@@ -1,7 +1,7 @@
 import repoInfo,filechange
 import gitcommands as git
 import pyfiglet
-f = pyfiglet.figlet_format('Github-Automation' , font = 'alligator')
+f = pyfiglet.figlet_format('G - Auto' , font = '5lineoblique')
 print(f)
 def init():
     info = repoInfo.checkinfoInDir()
