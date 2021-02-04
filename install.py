@@ -1,11 +1,8 @@
 from shutil import copy , copyfile
 import os
 dir = os.getcwd()
-files = []
-# files = ['diffcalc.py' , 'main.py' , 'filechange.py' , 'gitcommands.py' , 'repoInfo.py']
-for file in os.listdir(dir):
-    if(file.endswith('.py') and file != 'install.py'):
-        files.append(file)
+
+files = [file for file in os.listdir(dir) if file.endswith('.py') and file != 'install.py']
 print(files)
 
 def checkForIgnore(dst):

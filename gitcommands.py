@@ -16,14 +16,14 @@ def createReadme():
 def add(filelist):
     for file in filelist:
         # perform git add on file
-        print("Adding" , file)
+        print("Adding" , file.split('\\')[-1])
         call(('git add ' + file))
 
 # git commit -m "passed message"
 def commit(filelist):
     for file in filelist:
         # ask user for commit message
-        msg = str(input('Enter the commit message for ' + file +  ' or enter -r to reject commit'))
+        msg = str(input('Enter the commit message for ' + file.split('\\')[-1] +  ' or enter -r to reject commit'))
         # if msg == -r reject commit
         if(msg == '-r'):
             filelist.remove(file)
