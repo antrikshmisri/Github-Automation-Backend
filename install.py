@@ -3,14 +3,14 @@ import os
 dir = os.getcwd()
 
 files = [file for file in os.listdir(dir) if file.endswith('.py') and file != 'install.py']
+files.append('tmp.json')
 print(files)
-
 def checkForIgnore(dst):
     return os.path.isfile(os.path.join(dst , '.gitignore'))
 
 def addToIgnore(dst):
     with open(os.path.join(dst , '.gitignore') , "a") as f:
-            f.write('auto-scripts\n.idea\n__pycache__\n.git')
+            f.write('\nauto-scripts\n.idea\n__pycache__\n.git')
             f.close()
 
 def makeIgnore(dst):
