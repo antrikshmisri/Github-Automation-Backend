@@ -1,7 +1,8 @@
 import os
 
 cwd = os.getcwd()
-ignorepath = os.path.join(cwd , '.gitignore')
+ignorepath = os.path.join(cwd, '.gitignore')
+
 
 def getIgnoreFiles():
     ignorefiles = []
