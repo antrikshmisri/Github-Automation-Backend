@@ -20,7 +20,7 @@ To run the script use following commands
     ```
 2. Run the installation script
     ```bash
-    python install.py
+    python3 install.py
     ```
 3. Enter the project directory where changes are to be listened
     ```bash
@@ -33,7 +33,7 @@ To run the script use following commands
 
 5. Run the python script to listen for changes
     ```python
-    python ./auto-scripts/main.py
+    python3 ./auto-scripts/main.py
     ```
 
 ***Note:** This script listens to all nested files, ignoring all the directories and files present in .gitignore. If you want to add custom folders that you want the script to ignore add them in .gitignore*
