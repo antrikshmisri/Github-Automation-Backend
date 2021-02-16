@@ -9,7 +9,7 @@ def getIgnoreFiles():
     with open(ignorepath) as ignore:
         files = ignore.readlines()
         for file in files:
-            file = file.split('\n')[0]
+            file = ''.join(file.splitlines())
             if(file != ''):
                 filepath = os.path.join(cwd , file)
                 if(os.path.isfile(filepath) or os.path.isdir(filepath)):
