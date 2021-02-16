@@ -5,12 +5,13 @@ import gitcommands as git
 import diffcalc
 import ignore
 import logger
+import time
 from colors import logcolors
 mypath = os.getcwd()
 nestfiles = []
 
 ignoredirs = ignore.getIgnoreFiles()
-
+print(ignoredirs)
 # gets the list of all nested files
 
 
@@ -35,8 +36,26 @@ def read_file():
     return filecontent
 
 
-def ischanged(url, branch):
+def ischanged(url, branch,*args,**kwargs):
     changedfile = []
+    diffarr = []
+    initbuffer = kwargs.get('initbuffer' , -1)
+    if(initbuffer != -1):
+        for obj in initbuffer:
+            file = obj['path']
+            diff = obj['changes']
+            diffarr.append(diff)
+            changedfile.append(file)
+        git.add(changedfile)
+            # Performing Git Commit
+        if(git.commit(changedfile,diffarr) == False):
+            print(f'{logcolors.ERROR}Reverting Push{logcolors.ENDC}')
+            logger.updatedata(changedfile, diffarr)
+        else:
+            print(f'{logcolors.SUCCESS}Updating Logs{logcolors.ENDC}')
+            logger.updatedata(changedfile, diffarr)
+            if(len(changedfile) == 0):
+                git.push(url, branch)
     print('Listening for changes....')
     initial = list(read_file())
     while True:
@@ -60,23 +79,21 @@ def ischanged(url, branch):
             print(f"Changed file is {logcolors.BOLD}{changedfile}{logcolors.ENDC}\n")
             # Calculating Diff for previous and changed version of file
             diff = diffcalc.calcDiff(previtem, changeditem[0])
+            diffarr.append(diff)
             for file in changedfile:
                 logger.writedata(path=file, diff=diff)
             # Performing Git Commands For Changed File
             # Performing Git Add
             git.add(changedfile)
             # Performing Git Commit
-            if(git.commit(changedfile) == False):
+            if(git.commit(changedfile,diffarr) == False):
                 print(f'{logcolors.ERROR}Reverting Push{logcolors.ENDC}')
             else:
                 print(f'{logcolors.SUCCESS}Updating Logs{logcolors.ENDC}')
-                logger.readdata(changedfile, diff)
+                logger.updatedata(changedfile, diffarr)
                 if(len(changedfile) == 0):
                     git.push(url, branch)
-            # Performing Git Push
-            # elif(len(changedfile) == 0):
-            #     print('Updating Logs')
-            #     logger.readdata(changedfile , diff)
-            #     git.push(url , branch)
+
 
             initial = current
+            # time.sleep(5)
