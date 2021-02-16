@@ -26,14 +26,18 @@ def add(filelist):
 # git commit -m "passed message"
 
 
-def commit(filelist):
+def commit(filelist,*args,**kwargs):
+    diffarr = kwargs.get('diffarr' , -1)
     for file in filelist:
         # ask user for commit message
         msg = str(input(f'{logcolors.BOLD}Enter the commit message for{logcolors.ENDC} ' +
                         file.split('\\')[-1] + f' {logcolors.BOLD}or enter {logcolors.ERROR}-r{logcolors.ENDC} to reject commit{logcolors.ENDC}'))
+        diff = diffarr[filelist.index(file)]
         # if msg == -r reject commit
         if(msg == '-r'):
             print(f'{logcolors.ERROR}commit rejected{logcolors.ENDC}')
+            if(diffarr != -1):
+                diffarr.remove(diffarr[filelist.index(file)])
             filelist.remove(file)
             call('cls', shell=True)
             return False
