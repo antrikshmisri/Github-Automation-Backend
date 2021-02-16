@@ -3,11 +3,12 @@ import filechange
 import gitcommands as git
 from colors import logcolors
 import pyfiglet
-
+import logger
 
 def init():
     info = repoInfo.checkinfoInDir()
     url, branch = info
+    logger.checkdata(url , branch)
     if('n' in info):
         info.remove('n')
         git.init()
