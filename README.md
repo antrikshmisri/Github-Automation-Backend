@@ -38,5 +38,5 @@ To run the script use following commands
     python3 ./auto-scripts/main.py
     ```
 
-***Note:** This script listens to all nested files, ignoring all the directories and files present in .gitignore. If you want to add custom folders that you want the script to ignore add them in .gitignore. **Add all build directories or any directory that contains modules like: node_modules***
+***Note:** This script listens to all nested files, ignoring all the directories and files present in .gitignore. If you want to add custom folders that you want the script to ignore add them in .gitignore. **Add all build directories or any directory that contains modules like: node_modules to .gitignore***
 
