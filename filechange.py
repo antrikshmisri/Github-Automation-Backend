@@ -1,44 +1,24 @@
 import os
-from os import listdir
-from os.path import isfile, join
 import gitcommands as git
 import diffcalc
-import ignore
+from ignore import getIgnoreFiles
 import logger
-import time
+from utils import getNestedFiles,read_file,commitAndUpdate
 from colors import logcolors
 mypath = os.getcwd()
-nestfiles = []
 
-ignoredirs = ignore.getIgnoreFiles()
+ignoredirs = getIgnoreFiles()
 print(ignoredirs)
+
 # gets the list of all nested files
+onlyfiles = getNestedFiles(mypath,ignoredirs)
 
-
-def getNestedFiles(rootDir):
-    for path, subdirs, files in os.walk(rootDir):
-        if(all(ele not in path for ele in ignoredirs)):
-            for name in files:
-                nestfiles.append(join(path, name))
-    return nestfiles
-
-
-onlyfiles = getNestedFiles(mypath)
-
-# Reads and appends the contents of each file
-
-
-def read_file():
-    filecontent = []
-    for file in onlyfiles:
-        with open(onlyfiles[onlyfiles.index(file)], "r") as f:
-            filecontent.append(f.readlines())
-    return filecontent
 
 
 def ischanged(url, branch,*args,**kwargs):
     changedfile = []
     diffarr = []
+    # if uncommited data found perform git commands on them
     initbuffer = kwargs.get('initbuffer' , -1)
     if(initbuffer != -1):
         for obj in initbuffer:
@@ -46,20 +26,13 @@ def ischanged(url, branch,*args,**kwargs):
             diff = obj['changes']
             diffarr.append(diff)
             changedfile.append(file)
-        git.add(changedfile)
-            # Performing Git Commit
-        if(git.commit(changedfile,diffarr) == False):
-            print(f'{logcolors.ERROR}Reverting Push{logcolors.ENDC}')
-            logger.updatedata(changedfile, diffarr)
-        else:
-            print(f'{logcolors.SUCCESS}Updating Logs{logcolors.ENDC}')
-            logger.updatedata(changedfile, diffarr)
-            if(len(changedfile) == 0):
-                git.push(url, branch)
+
+        # Performing Git Commands for changed files
+        commitAndUpdate(changedfile,diffarr,url,branch)
     print('Listening for changes....')
-    initial = list(read_file())
+    initial = list(read_file(onlyfiles))
     while True:
-        current = list(read_file())
+        current = list(read_file(onlyfiles))
         changeditem = []
         previtem = []
         if(current != initial):
@@ -77,23 +50,15 @@ def ischanged(url, branch,*args,**kwargs):
                 print('loop :-', i)
                 changedfile.append(onlyfiles[current.index(changeditem[i])])
             print(f"Changed file is {logcolors.BOLD}{changedfile}{logcolors.ENDC}\n")
+
             # Calculating Diff for previous and changed version of file
             diff = diffcalc.calcDiff(previtem, changeditem[0])
             diffarr.append(diff)
             for file in changedfile:
                 logger.writedata(path=file, diff=diff)
-            # Performing Git Commands For Changed File
-            # Performing Git Add
-            git.add(changedfile)
-            # Performing Git Commit
-            if(git.commit(changedfile,diffarr) == False):
-                print(f'{logcolors.ERROR}Reverting Push{logcolors.ENDC}')
-            else:
-                print(f'{logcolors.SUCCESS}Updating Logs{logcolors.ENDC}')
-                logger.updatedata(changedfile, diffarr)
-                if(len(changedfile) == 0):
-                    git.push(url, branch)
 
+            # Performing Git Commands for changed files
+            commitAndUpdate(changedfile,diffarr,url,branch)
 
             initial = current
             # time.sleep(5)
