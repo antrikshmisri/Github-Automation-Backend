@@ -32,7 +32,6 @@ def commit(filelist,*args,**kwargs):
         # ask user for commit message
         msg = str(input(f'{logcolors.BOLD}Enter the commit message for{logcolors.ENDC} ' +
                         file.split('\\')[-1] + f' {logcolors.BOLD}or enter {logcolors.ERROR}-r{logcolors.ENDC} to reject commit{logcolors.ENDC}'))
-        diff = diffarr[filelist.index(file)]
         # if msg == -r reject commit
         if(msg == '-r'):
             print(f'{logcolors.ERROR}commit rejected{logcolors.ENDC}')
