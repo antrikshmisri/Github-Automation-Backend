@@ -6,9 +6,11 @@ This script allows user to completely automate github workflow. This script keep
 ## Features
 
 - Auto fetches repository info(uri , working branch) from local dir
-- Keeps track of changed files/dir including new added files
+- Keeps track of changed files
+- Adds changed file,diff to json file
 - Calculates diff for changed files
 - Auto performs git commands for changed files(Need to pass commit messages)
+- Auto performs git commands for uncommited files on script startup
 
 ## How To Run
 
@@ -36,5 +38,5 @@ To run the script use following commands
     python3 ./auto-scripts/main.py
     ```
 
-***Note:** This script listens to all nested files, ignoring all the directories and files present in .gitignore. If you want to add custom folders that you want the script to ignore add them in .gitignore*
+***Note:** This script listens to all nested files, ignoring all the directories and files present in .gitignore. If you want to add custom folders that you want the script to ignore add them in .gitignore. **Add all build directories or any directory that contains modules like: node_modules***
 
