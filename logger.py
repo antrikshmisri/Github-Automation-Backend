@@ -2,7 +2,7 @@ import json
 import os
 from colors import logcolors
 import filechange
-jsonpath = os.path.join(os.getcwd(), 'auto-scripts\\tmp.json')
+jsonpath = os.path.join(os.getcwd(), 'auto-scripts' , 'tmp.json')
 buffer = []
 
 
@@ -34,7 +34,7 @@ def updatedata(filename, diffarr):
             tmpdata,tmpfile,tmpdiff = readdata.copy(),filename.copy(),diffarr.copy()
             print('Found some changed files')
             for file,diff in zip(filename,diffarr):
-                print('Removing ' + str(file) + ' from json file')
+                print(f'Removing {str(file)} from json file')
                 for obj in readdata:
                     if obj['path'] == file and obj['changes'] == diff:
                         tmpdata.remove(obj)
