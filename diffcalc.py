@@ -1,19 +1,12 @@
 from colors import logcolors
-import difflib
+from difflib import ndiff
+from utils import getMaxSpaces
 
-
-def getMaxSpaces(file):
-    max = float('-inf')
-    for ele in file:
-        ele = ele.strip()
-        if(len(ele) > max):
-            max = len(ele)
-    return max
 
 
 def calcDiff(firstFile, secondFile):
     # calculate raw diff
-    diff = difflib.ndiff(firstFile, secondFile)
+    diff = ndiff(firstFile, secondFile)
     # calculate unique lines in secondfile
     deltainit = ''.join(x[2:] for x in diff if x.startswith('+ '))
     # reformat the lines
