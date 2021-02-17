@@ -1,9 +1,9 @@
 # Github-Automation
 
-## About This Project
+## About This Project :books:
 This script allows user to completely automate github workflow. This script keeps track of changed files and generates a diff, then auto adds and commits(asks for a commit message) the changed files.
 
-## Features
+## Features :sparkles:
 
 - Auto fetches repository info(uri , working branch) from local dir
 - Keeps track of changed files
@@ -12,7 +12,7 @@ This script allows user to completely automate github workflow. This script keep
 - Auto performs git commands for changed files(Need to pass commit messages)
 - Auto performs git commands for uncommited files on script startup
 
-## How To Run
+## How To Run :runner:
 
 To run the script use following commands
 
